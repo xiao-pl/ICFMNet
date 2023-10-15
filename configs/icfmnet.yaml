@@ -1,0 +1,92 @@
+model:
+  channels: 32
+  num_blocks: 7
+  semantic_classes: 3
+  instance_classes: 3
+  sem2ins_classes: []
+  semantic_only: False
+  ignore_label: -100
+  candidate_cfg:
+    nms_N: 300
+    nms_R: 0.08
+    nms_thres: 0.6
+    nms_localThres: 0.5
+    nms_maxActive_f: 300
+  test_cfg:
+    topk_insts: 100
+    cls_score_thr: 0.001
+    mask_score_thr: -0.5
+    min_npoint: 40
+  query_cfg:
+    num_decode: 6
+    # num_layer: 4
+    num_class: 3
+    in_channel: 32
+    d_model: 256
+    nhead: 8
+    hidden_dim: 1024
+    dropout: 0.0
+    activation_fn: gelu
+    attn_mask: True
+    cost_weight: [0.5, 1.0, 1.0]
+    query_loss_weight: [0.5, 1.0, 1.0, 0.0]   # cls, bce, iou, score
+    inst_weight: [2.0, 1.0, 2.0]
+    use_feat_query: False    # True: feat作为query, False: feat作为pos
+    only_last_loss: False
+  # fixed_modules: []
+  fixed_modules: ['input_conv', 'unet', 'output_layer', 'offset_linear', 'semantic_linear']
+  use_transformer: True
+  transformer_before: False
+  stop_trans: 5
+
+data:
+  train:
+    type: 'wheat'
+    data_root: 'dataset/wheat'
+    prefix: 'train'
+    suffix: '_inst_nostuff.pth'
+    training: True
+    repeat: 2
+    voxel_cfg:
+      scale: 50
+      spatial_shape: [256, 1024]
+      max_npoint: 250000
+      min_npoint: 500
+  test:
+    type: 'wheat'
+    data_root: 'dataset/wheat'
+    prefix: 'val'
+    suffix: '_inst_nostuff.pth'
+    training: False
+    voxel_cfg:
+      scale: 50
+      spatial_shape: [256, 1024]
+      max_npoint: 250000
+      min_npoint: 500
+
+dataloader:
+  train:
+    batch_size: 2
+    num_workers: 4
+  test:
+    batch_size: 1
+    num_workers: 1
+
+optimizer:
+  type: 'AdamW'
+  lr: 0.0001
+  # lr: 0.000004
+  weight_decay: 0.05
+
+save_cfg:
+  semantic: True
+  offset: True
+  instance: True
+
+lr_clip: 0.0000001
+fp16: False
+epochs: 1024      # 512
+step_epoch: 128   # 184
+save_freq: 8
+pretrain: "work_dirs/icfmnet_(best)/epoch_984.pth"
+work_dir: ''
