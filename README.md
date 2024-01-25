@@ -19,7 +19,7 @@ Three-dimensional high-throughput plant phenotyping technology offers an opportu
 
 ## Visualization
 
-| | z1 | z2 | z4 | z5 | z6 | z8 | z9 | z10 |
+| | z1 | z2 | z3 | z4 | z5 | z6 | z7 | z8 |
 |:----------:|:----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
 | Semantic segmentation | ![z1](./example/picture_sem/z1.png) | ![z2](./example/picture_sem/z2.png) | ![z4](./example/picture_sem/z4.png) | ![z5](./example/picture_sem/z5.png) | ![z6](./example/picture_sem/z6.png) | ![z8](./example/picture_sem/z8.png) | ![z9](./example/picture_sem/z9.png) | ![z10](./example/picture_sem/z10.png) |
 | Instance segmentation | ![z1](./example/picture_inst/z1.png) | ![z2](./example/picture_inst/z2.png) | ![z4](./example/picture_inst/z4.png) | ![z5](./example/picture_inst/z5.png) | ![z6](./example/picture_inst/z6.png) | ![z8](./example/picture_inst/z8.png) | ![z9](./example/picture_inst/z9.png) | ![z10](./example/picture_inst/z10.png) |
